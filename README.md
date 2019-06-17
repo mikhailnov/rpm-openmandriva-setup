@@ -1,3 +1,3 @@
-This is a default configuration files for building RPM packages for OpenMandriva Lx distribution.
+This is a default configuration files for building RPM packages for ROSA distribution.
 
-https://openmandriva.org
+https://rosalinux.ru

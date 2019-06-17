@@ -1,7 +1,7 @@
-%distribution OpenMandriva Lx
-%vendor OpenMandriva
-%bugurl https://issues.openmandriva.org
-%disturl https://openmandriva.org
+%distribution ROSA
+%vendor ROSA
+%bugurl http://bugzilla.rosalinux.ru
+%disturl https://rosalinux.ru
 
 # Disable automatic dependencies on parent directory and symlinks for now
 %_check_symlink_deps 0
@@ -23,7 +23,7 @@
 %mkrel(c:) %{-c: 0.%{-c*}.}%{1}%{?subrel:.%subrel}
 
 # For the built rpm filename format...
-%disttag %{!?distsuffix:omv}%{?distsuffix}%{!?distrelease:%(sed -e 's#.*release\\ \\(\\S*\\).*#\\1#' /etc/release)}%{?distrelease}
+%disttag %{!?distsuffix:rosa}%{?distsuffix}%{!?distrelease:%(sh -c '. /etc/os-release; echo \$VERSION_ID')}%{?distrelease}
 
 # The output binary package file name template used when building binary packages.
 # XXX: Note: escaped %% for use in headerSprintf()
