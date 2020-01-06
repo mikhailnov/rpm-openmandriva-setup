@@ -62,9 +62,12 @@ Provides:	%{1} = %{?2}%{!?2:%{EVRD}} \
 
 %_fmoddir %{_libdir}/gfortran/modules
 
-# use XZ to compress binary packages:
-%_binary_payload w5.xzdio
-%_xz_threads -1
+# https://nixtux.ru/819
+# use multithreaded XZ to compress binary packages
+%_binary_payload w6T.xzdio
+# compress source packages with level 2 xz because they usually
+# contain already compressed tarballs
+%_source_payload w2T.xzdio
 
 # Use SHA-256 for FILEDIGESTS instead of default MD5
 %_source_filedigest_algorithm 8
