@@ -154,11 +154,17 @@ Provides:	%{1} = %{?2}%{!?2:%{EVRD}} \
 
 %_fortify_cflags -D_FORTIFY_SOURCE=2
 
+# Enable -fPIC by default (as it was in ROSA/Mandriva's RPM5
+# to avoid problems when an -fPIC-enabled shared object is linked against a static non-fPIC library,
+# e.g. Heimdal sets -fPIC itself and tries to link against a static libcrypt.a
+# https://wiki.gentoo.org/wiki/Project:AMD64/Fixing_-fPIC_Errors_Guide
+%_fpic_cflags -fPIC
+
 # cf http://wiki.mandriva.com/en/Development/Packaging/Problems#format_not_a_string_literal_and_no_format_arguments
 %Werror_cflags -Wformat -Werror=format-security
 
 %_ssp_cflags -fstack-protector-strong --param=ssp-buffer-size=4 %{?_serverbuild_flags: %_serverbuild_flags}
-%__common_cflags -O2 -fomit-frame-pointer %{debugcflags} -pipe %{Werror_cflags} %{?_fortify_cflags}
+%__common_cflags -O2 -fomit-frame-pointer %{debugcflags} -pipe %{Werror_cflags} %{?_fortify_cflags} %{?_fpic_cflags}
 %__common_cflags_with_ssp %{__common_cflags} %{?_ssp_cflags}
 
 # Servers opt flags.
