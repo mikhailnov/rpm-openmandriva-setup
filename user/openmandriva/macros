@@ -111,13 +111,13 @@ Provides:	%{1} = %{?2}%{!?2:%{EVRD}} \
 # the corresponding variable names.
 %build_fflags %{optflags} -I%{_fmoddir}
 
-%build_ldflags %{optflags} -Wl,-O2 %{?!_disable_ld_no_undefined: -Wl,--no-undefined} %{?!_disable_lto:-flto} %{?_hardened_flags}
+%ldflags %{optflags} -Wl,-O2 %{?!_disable_ld_no_undefined: -Wl,--no-undefined} %{?!_disable_lto:-flto} %{?_hardened_flags}
+%build_ldflags %{ldflags}
 
 # LTO doesn't seem to work reliably at the moment...
 %_disable_lto 1
 
 # Deprecated names.  For backwards compatibility only.
-%ldflags %build_ldflags
 %__global_cflags %{build_cflags}
 %__global_cxxflags %{build_cxxflags}
 %__global_fflags %{build_fflags}
